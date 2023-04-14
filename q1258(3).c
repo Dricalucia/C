@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+RESPOSTA DO BEECROWD:
+Accepted
+
+*/
+
 /*Criando a struct */
 struct camisetas // definição
 {
@@ -9,7 +15,7 @@ struct camisetas // definição
     char tam;
 };
 
-void ordenar(struct camisetas estudante[], int N);
+void ordena(struct camisetas estudante[], int N);
 
 int main()
 {
@@ -36,59 +42,60 @@ int main()
         - nome (ordem ascendente)
         */
 
-        ordenar(estudante, N);
+        ordena(estudante, N);
 
         // imprimir struct ordenada
         for (j = 0; j < N; j++)
         {
             printf("%s %c %s\n", estudante[j].cor, estudante[j].tam, estudante[j].nome);
         }
+
+        scanf("%d", &N);
         if (N != 0)
         {
             printf("\n");
         }
-        scanf("%d", &N);
     }
     return 0;
 }
 
-void ordenar(struct camisetas estudante[], int N)
+void ordena(struct camisetas estudante[], int N)
 {
-    struct camisetas aux;
-    int status = 1, ultimo = N - 1;
-    int m, o;
-
-    while (status == 1)
+    int j;
+    for (int i = 1; (i < N); i++)
     {
-        status = 0;
-
-        for (int m = 0; m < ultimo; m++)
+        j = i - 1;
+        struct camisetas aux = estudante[i];
+        while (j >= 0 && strcmp(estudante[j].nome, aux.nome) > 0)
         {
-            for (int o = m + 1; o < ultimo; o++)
-            {
-                if (strcmp(estudante[m].cor, estudante[o].cor) > 0)
-                {
-                    status = 1;
-                    aux = estudante[m];
-                    estudante[m] = estudante[o];
-                    estudante[o] = aux;
-                }
-                else if ((strcmp(estudante[m].cor, estudante[o].cor) == 0) && (strcmp(estudante[m].tam, estudante[o].tam) < 0))
-                {
-                    status = 1;
-                    aux = estudante[m];
-                    estudante[m] = estudante[o];
-                    estudante[o] = aux;
-                }
-                else if ((strcmp(estudante[m].cor, estudante[o].cor) == 0) && (strcmp(estudante[m].tam, estudante[o].tam) == 0) && (strcmp(estudante[m].nome, estudante[o].nome) > 0))
-                {
-                    status = 1;
-                    aux = estudante[m];
-                    estudante[m] = estudante[o];
-                    estudante[o] = aux;
-                }
-            }
-            ultimo--;
+            estudante[j + 1] = estudante[j];
+            j--;
         }
+        estudante[j + 1] = aux;
+    }
+
+    for (int i = 1; (i < N); i++)
+    {
+        j = i - 1;
+        struct camisetas aux = estudante[i];
+        while (j >= 0 && strcmp(estudante[j].cor, aux.cor) > 0)
+        {
+            estudante[j + 1] = estudante[j];
+            j--;
+        }
+        estudante[j + 1] = aux;
+    }
+
+    for (int i = 1; (i < N); i++)
+    {
+        j = i - 1;
+        struct camisetas aux = estudante[i];
+
+        while (j >= 0 && estudante[j].tam < aux.tam)
+        {
+            estudante[j + 1] = estudante[j];
+            j--;
+        }
+        estudante[j + 1] = aux;
     }
 }

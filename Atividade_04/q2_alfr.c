@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-/*
-RESPOSTA DO BEECROWD:
-Accepted
-
-*/
-
 /*Criando a struct */
 struct camisetas // definição
 {
@@ -15,7 +9,9 @@ struct camisetas // definição
     char tam;
 };
 
-void ordena(struct camisetas estudante[], int N);
+void ordCor(struct camisetas estudante[], int N);
+void ordTam(struct camisetas estudante[], int N);
+void ordNome(struct camisetas estudante[], int N);
 
 int main()
 {
@@ -42,7 +38,9 @@ int main()
         - nome (ordem ascendente)
         */
 
-        ordena(estudante, N);
+        ordCor(estudante, N);
+        ordTam(estudante, N);
+        ordNome(estudante, N);
 
         // imprimir struct ordenada
         for (j = 0; j < N; j++)
@@ -59,43 +57,55 @@ int main()
     return 0;
 }
 
-void ordena(struct camisetas estudante[], int N)
+void ordCor(struct camisetas estudante[], int N)
 {
-    int j;
-    for (int i = 1; (i < N); i++)
+    for (int i = 1; i < N; i++)
     {
-        j = i - 1;
-        struct camisetas aux = estudante[i];
-        while (j >= 0 && strcmp(estudante[j].nome, aux.nome) > 0)
+        for (int j = 0; j < N - 1; j++)
         {
-            estudante[j + 1] = estudante[j];
-            j--;
+            if (tolower(estudante[j].cor[0]) > tolower(estudante[j + 1].cor[0]))
+            {
+                struct camisetas temp = estudante[j];
+                estudante[j] = estudante[j + 1];
+                estudante[j + 1] = temp;
+            }
         }
-        estudante[j + 1] = aux;
     }
+}
 
-    for (int i = 1; (i < N); i++)
+void ordTam(struct camisetas estudante[], int N)
+{
+    for (int i = 1; i < N; i++)
     {
-        j = i - 1;
-        struct camisetas aux = estudante[i];
-
-        while (j >= 0 && estudante[j].tam < aux.tam)
+        for (int j = 0; j < N - 1; j++)
         {
-            estudante[j + 1] = estudante[j];
-            j--;
+            if ((tolower(estudante[j].cor[0]) == tolower(estudante[j + 1].cor[0])) && (tolower(estudante[j].tam) < tolower(estudante[j + 1].tam)))
+            {
+                struct camisetas temp = estudante[j];
+                estudante[j] = estudante[j + 1];
+                estudante[j + 1] = temp;
+            }
         }
-        estudante[j + 1] = aux;
     }
+}
 
-    for (int i = 1; (i < N); i++)
+void ordNome(struct camisetas estudante[], int N)
+{
+    for (int i = 1; i < N; i++)
     {
-        j = i - 1;
-        struct camisetas aux = estudante[i];
-        while (j >= 0 && strcmp(estudante[j].cor, aux.cor) > 0)
+        for (int j = 0; j < N - 1; j++)
         {
-            estudante[j + 1] = estudante[j];
-            j--;
+            if ((tolower(estudante[j].cor[0]) == tolower(estudante[j + 1].cor[0])) && (tolower(estudante[j].tam) == tolower(estudante[j + 1].tam)))
+            {
+                if (strcmp(estudante[j].nome, estudante[j + 1].nome) > 0)
+                {
+                    {
+                        struct camisetas temp = estudante[j];
+                        estudante[j] = estudante[j + 1];
+                        estudante[j + 1] = temp;
+                    }
+                }
+            }
         }
-        estudante[j + 1] = aux;
     }
 }

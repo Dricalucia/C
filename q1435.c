@@ -18,12 +18,16 @@ int main()
         }
 
         inicio = 0;
+        // informa o indice final da matriz
         fim = N - 1;
 
+        // k é o valor do elemento
         for (k = 1; k <= meioM; k++)
         {
+            // percorre as linhas (i)
             for (i = inicio; i <= fim; i++)
             {
+                // percorre as colunas (j)
                 for (j = inicio; j <= fim; j++)
                 {
                     M[i][j] = k;

@@ -3,11 +3,10 @@
 void funcao1();
 int funcao2(int a);
 
-int a = 10;
+int a = 10; // variavel global
 
 int main(void)
 {
-
     printf("O valor de a em main é %d\n", a);
     funcao1();
     a = 15;

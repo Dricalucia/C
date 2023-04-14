@@ -15,7 +15,14 @@ int main()
         for (j = 0; j < 12; j++)
         {
             scanf("%lf", &M[i][j]);
-            if (j > i)
+        }
+    }
+
+    for (i = 0; i < 12; i++)
+    {
+        for (j = 0; j < 12; j++)
+        {
+            if (j < i)
             {
                 soma += M[i][j];
                 contador += 1;

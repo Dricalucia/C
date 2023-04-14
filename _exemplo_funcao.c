@@ -6,7 +6,6 @@ unsigned int potencia(int a, int b);
 
 int main(void)
 {
-
     int a, b;
 
     printf("Digite 2 números: ");
