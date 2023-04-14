@@ -1,0 +1,19 @@
+
+if(N % 2 == 1)
+{
+  meio =(N/2) + 1;
+} else {
+  meio=(N/2);
+}
+
+inicA = 0;
+fimA = N;
+
+for(k = 1;k <= meio;k++){
+   for(i = inicA;i < fimA;i++){
+       for(j = inicA;j < fimA;j++){
+	       M[i][j]= k;
+       }
+   }
+   inicA++; fimA--;
+}
